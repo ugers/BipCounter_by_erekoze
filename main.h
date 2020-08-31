@@ -5,7 +5,6 @@
 	Приложение Счётчик для BipOS
 	
 */
-
 #include "libbip.h"
 #ifndef __APP_TEMPLATE_H__
 #define __APP_TEMPLATE_H__

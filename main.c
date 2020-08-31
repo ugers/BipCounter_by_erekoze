@@ -88,12 +88,58 @@ if ( (param0 == *app_data_p) && get_var_menu_overlay()){ // возврат из 
 set_display_state_value(8, 1);
 set_display_state_value(2, 1);
 
+		char* tips_string_ru[] = {
+				 "-увел/умень", "-выбор/сброс", "-сохр&выйти"};
+		char* tips_string_en[] = {
+				 "-incr/decr", "-select/reset", "-save&exit"};
+		char* tips_string_it[] = {
+				"-incr/decr", "-selezi/ripris", "-salva&esci"}; //incremento/decremento selezionare/ripristinare salva/esci
+		char* tips_string_fr[] = {
+				"-incr/décr", "-sélect/reset", "-sauve&quit"}; //incrémenter/décrémenter sélectionner/réinitialiser sauvegarder/quitter
+		char* tips_string_es[] = {
+				"-incr/decr", "-selecc/restab", "-guardar&salir"}; //incrementar/decrementar seleccionar/restablecer guardar/salir
+		char* tips_string_de[] = {
+				"-inkr/dekr", "-auswäh/zurück", "-speic&schl"};//Inkrementieren/Dekrementieren auswählen/zurücksetzen  speichern/schließen
+		char* tips_string_gr[] = {
+				"-αύξη/μείω", "-επιλέξ/επανα", "-αποθή&έξοδος"}; //αύξηση/μείωση επιλέξτε/επαναφέρετε αποθήκευση/έξοδος
+		char** tips_string;
+		switch (get_selected_locale()) {
+			case locale_ru_RU: {
+				tips_string = tips_string_ru;
+				break;
+			}
+			case locale_it_IT: {
+				tips_string = tips_string_it;
+				break;
+			}
+			case locale_fr_FR: {
+				tips_string = tips_string_fr;
+				break;
+			}
+			case locale_es_ES: {
+				tips_string = tips_string_es;
+				break;
+			}
+			case locale_de_DE: {
+				tips_string = tips_string_de;
+				break;
+			}
+			case locale_el_GR: {
+				tips_string = tips_string_gr;
+				break;
+			}
+			default: {
+				tips_string = tips_string_en;
+				break;
+			}
+		};
+
 // здесь выполняем отрисовку интерфейса, обновление (перенос в видеопамять) экрана выполнять не нужно
 set_bg_color(COLOR_BLACK); // делаем фон синим
 fill_screen_bg(); // заливаем экран фоном
 load_font(); // подгружаем шрифты
 set_fg_color(COLOR_WHITE); // делаем текст белым
-text_out_center("BipCounter v.2.1", 88, 3); // выводим заголовок
+text_out_center("BipCounter v.2.2", 88, 3); // выводим заголовок
 show_elf_res_by_id(app_data->proc->index_listed, 7, 40, 21); // рисуем (C)
 text_out("AVBurkov", 62, 22); // выводим автора
 draw_screen(app_data->col); // перерисоваваем экран
@@ -101,13 +147,13 @@ show_elf_res_by_id(app_data->proc->index_listed, 0, 7, 112); // рисуем р�
 show_elf_res_by_id(app_data->proc->index_listed, 1, 28, 112); // рисуем стрелку вверх
 text_out("/", 49, 115); // выводим разделитель
 show_elf_res_by_id(app_data->proc->index_listed, 2, 59, 112); // рисуем стрелку вниз
-text_out("-incr/decr", 80, 115); // выводим подсказку
+text_out(tips_string[0], 80, 115); // выводим подсказку
 show_elf_res_by_id(app_data->proc->index_listed, 3, 4, 133); // рисуем стрелку влево
 text_out("/", 25, 136); // выводим разделитель
 show_elf_res_by_id(app_data->proc->index_listed, 4, 35, 133); // рисуем стрелку вправо
-text_out("-select/reset", 55, 136); // выводим подсказку
-show_elf_res_by_id(app_data->proc->index_listed, 5, 30, 154); // рисуем кнопку
-text_out("-save&exit", 51, 157); // выводим подсказку
+text_out(tips_string[1], 55, 136); // выводим подсказку
+show_elf_res_by_id(app_data->proc->index_listed, 5, 25, 154); // рисуем кнопку
+text_out(tips_string[2], 46, 157); // выводим подсказку
 // при необходимости ставим таймер вызова screen_job в мс
 set_update_period(1, 3000); // при запуске ставим паузу 3000мс
 }
