@@ -1,0 +1,7 @@
+BipCounter
+RU	Счётчик
+GR	Μετρητής
+IT	Counter
+ES	Contador
+FR	Compteur
+DE	Zähler
