@@ -5,9 +5,12 @@
 	Приложение Счётчик для BipOS
 	
 */
+
 #include "libbip.h"
 #ifndef __APP_TEMPLATE_H__
 #define __APP_TEMPLATE_H__
+
+typedef unsigned short word;
 
 // структура данных для нашего экрана
 struct app_data_ {

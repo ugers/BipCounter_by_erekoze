@@ -81,7 +81,7 @@ if ( (param0 == *app_data_p) && get_var_menu_overlay()){ // возврат из 
         app_data->ret_f = show_watchface;
   
     // здесь проводим действия которые необходимо если функция запущена впервые из меню: заполнение всех структур данных и т.д.
-    ElfReadSettings(app_data->proc->index_listed, &app_data->col, 0, sizeof(app_data->col)); // читаем данные из памяти
+    ElfReadSettings(ELF_INDEX_SELF, &app_data->col, 0, sizeof(app_data->col)); // читаем данные из памяти
 }
 
 // экран гаснет после таймаута, загорается при нажатии на экран
@@ -139,20 +139,20 @@ set_bg_color(COLOR_BLACK); // делаем фон синим
 fill_screen_bg(); // заливаем экран фоном
 load_font(); // подгружаем шрифты
 set_fg_color(COLOR_WHITE); // делаем текст белым
-text_out_center("BipCounter v.2.2", 88, 3); // выводим заголовок
-show_elf_res_by_id(app_data->proc->index_listed, 7, 40, 21); // рисуем (C)
-text_out("AVBurkov", 62, 22); // выводим автора
+text_out("BipCounter", 3, 3); // выводим заголовок
+show_elf_res_by_id(ELF_INDEX_SELF, 7, 3, 21); // рисуем (C)
+text_out("AVBurkov", 25, 22); // выводим автора
 draw_screen(app_data->col); // перерисоваваем экран
-show_elf_res_by_id(app_data->proc->index_listed, 0, 7, 112); // рисуем руку
-show_elf_res_by_id(app_data->proc->index_listed, 1, 28, 112); // рисуем стрелку вверх
+show_elf_res_by_id(ELF_INDEX_SELF, 0, 7, 112); // рисуем руку
+show_elf_res_by_id(ELF_INDEX_SELF, 1, 28, 112); // рисуем стрелку вверх
 text_out("/", 49, 115); // выводим разделитель
-show_elf_res_by_id(app_data->proc->index_listed, 2, 59, 112); // рисуем стрелку вниз
+show_elf_res_by_id(ELF_INDEX_SELF, 2, 59, 112); // рисуем стрелку вниз
 text_out(tips_string[0], 80, 115); // выводим подсказку
-show_elf_res_by_id(app_data->proc->index_listed, 3, 4, 133); // рисуем стрелку влево
+show_elf_res_by_id(ELF_INDEX_SELF, 3, 4, 133); // рисуем стрелку влево
 text_out("/", 25, 136); // выводим разделитель
-show_elf_res_by_id(app_data->proc->index_listed, 4, 35, 133); // рисуем стрелку вправо
+show_elf_res_by_id(ELF_INDEX_SELF, 4, 35, 133); // рисуем стрелку вправо
 text_out(tips_string[1], 55, 136); // выводим подсказку
-show_elf_res_by_id(app_data->proc->index_listed, 5, 25, 154); // рисуем кнопку
+show_elf_res_by_id(ELF_INDEX_SELF, 5, 25, 154); // рисуем кнопку
 text_out(tips_string[2], 46, 157); // выводим подсказку
 // при необходимости ставим таймер вызова screen_job в мс
 set_update_period(1, 3000); // при запуске ставим паузу 3000мс
@@ -161,7 +161,7 @@ set_update_period(1, 3000); // при запуске ставим паузу 300
 void key_press_screen(){
 struct app_data_**  app_data_p = (struct app_data_ **)get_ptr_temp_buf_2();    //  указатель на указатель на данные экрана
 struct app_data_ *	app_data = *app_data_p;				//	указатель на данные экрана
-ElfWriteSettings(app_data->proc->index_listed, &app_data->col, 0, sizeof(app_data->col)); // пишем данные в память при нажатии кнопки и выходе
+ElfWriteSettings(ELF_INDEX_SELF, &app_data->col, 0, sizeof(app_data->col)); // пишем данные в память при нажатии кнопки и выходе
 // вызываем функцию возврата (обычно это меню запуска), в качестве параметра указываем адрес функции нашего приложения
 show_menu_animate(app_data->ret_f, (unsigned int)show_screen, ANIMATE_RIGHT);	
 };
@@ -287,15 +287,66 @@ switch (gest->gesture){
 	return result;
 };
 
+void show_battery(int x, int y){
+    struct res_params_ res_params;
+    get_res_params(ELF_INDEX_SELF, 8, &res_params);
+    x -= res_params.width;
+    show_elf_res_by_id(ELF_INDEX_SELF, 8, x, y+2);
+
+    if (get_fw_version() != 11536)
+    {
+        //set_bg_color(COLOR_YELLOW);
+        //draw_filled_rect_bg(x + 2, y + 2, x + 21, y + 10);
+    }else{
+#ifdef BipEmulator
+        word battery_percentage = 80;
+#else
+        word battery_percentage = *((word*)(0x20000334));
+#endif
+		//Цвет индикатора батареи
+        char r_count = battery_percentage / 20;
+        r_count = r_count > 4 ? 4 : r_count < 1 ? 1 : r_count;
+		if (battery_percentage > 20) {
+			set_bg_color(battery_percentage <= 60 ? COLOR_YELLOW : COLOR_GREEN);
+		}else if (battery_percentage <= 20) {
+			set_bg_color(COLOR_RED);
+		}
+
+        for (char i = 0; i < r_count; i++)
+        {
+            draw_filled_rect_bg(x + 2 + i * 5, y + 4, x + 5 + i * 5, y + 11);
+        }
+
+        x -= 3;
+		//Проценты батареи
+        do
+        {
+            char d = battery_percentage % 10;
+            //get_res_params(ELF_INDEX_SELF, d, &res_params);
+            //x -= res_params.width;
+            x -= 10;
+            //show_elf_res_by_id(ELF_INDEX_SELF, d, x, y + 1);
+			char d1[4];     // переменная для перевода переменной для печати                               
+			_sprintf(d1, "%01d", d); // конвертируем
+			set_bg_color(COLOR_BLACK); // делаем фон черным
+			text_out(d1, x, y);
+            x -= 2;
+            battery_percentage = battery_percentage / 10;
+        } while (battery_percentage);
+    }
+}
+
+
 // пользовательская функция
 void draw_screen(int col){
-	struct app_data_**  app_data_p = (struct app_data_ **)get_ptr_temp_buf_2();    //  указатель на указатель на данные экрана
-	struct app_data_ *	app_data = *app_data_p;				//	указатель на данные экрана
+	//struct app_data_**  app_data_p = (struct app_data_ **)get_ptr_temp_buf_2();    //  указатель на указатель на данные экрана
+	//struct app_data_ *	app_data = *app_data_p;				//	указатель на данные экрана
+    show_battery(170, 8);	// Заряд батареи
 	char crnd[8];     // переменная для перевода переменной col типа int в  тип char для печати                               
     _sprintf(crnd, "%07d", col); // конвертируем число int в char лидирующие нули, при необходимости, _sprintf добьёт сам
 	set_bg_color(COLOR_BLACK); // делаем фон черным
 	draw_filled_rect_bg(0, 43, 176, 110); // стираем предыдущее значение
 	show_big_digit(3, crnd, 12, 62, 5); // печатаем результат большими цифрами
-	show_elf_res_by_id(app_data->proc->index_listed, 6, 142-(22*incr_no), 47); // выводим индикатор разряда увеличения
+	show_elf_res_by_id(ELF_INDEX_SELF, 6, 142-(22*incr_no), 47); // выводим индикатор разряда увеличения
 	repaint_screen_lines(0, 176); // обновляем строки экрана
 };
