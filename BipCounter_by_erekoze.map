@@ -4,20 +4,19 @@ Archive member included to satisfy reference by file (symbol)
 
 Discarded input sections
 
+ .text          0x00000000        0x0 BipStatusbarLib.o
+ .data          0x00000000        0x0 BipStatusbarLib.o
+ .bss           0x00000000        0x0 BipStatusbarLib.o
  .data          0x00000000        0x0 main.o
  .bss           0x00000000        0x0 main.o
  .data          0x00000000        0x0 ..\libbip\libbip.a(import.o)
  .bss           0x00000000        0x0 ..\libbip\libbip.a(import.o)
  .text.intro    0x00000000        0x9 ..\libbip\libbip.a(import.o)
- .text.text_out_center
-                0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.text_width
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.get_text_height
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.get_last_text_pos_x
-                0x00000000        0xc ..\libbip\libbip.a(import.o)
- .text.draw_horizontal_line
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.draw_rect
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
@@ -77,8 +76,6 @@ Discarded input sections
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.get_left_side_menu_active
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
- .text.get_current_date_time
-                0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.vTaskDelay
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.show_alarm_set_screen
@@ -106,8 +103,6 @@ Discarded input sections
  .text.send_host_app_msg
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.send_host_app_data
-                0x00000000        0xc ..\libbip\libbip.a(import.o)
- .text.check_app_state
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.stm32_soft_reset
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
@@ -171,6 +166,8 @@ Discarded input sections
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.ElfGetSettingsSize
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
+ .text.get_res_params
+                0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.get_proc_by_addr
                 0x00000000        0xc ..\libbip\libbip.a(import.o)
  .text.read_elf_res_by_id
@@ -224,6 +221,7 @@ Name             Origin             Length             Attributes
 
 Linker script and memory map
 
+LOAD BipStatusbarLib.o
 LOAD main.o
 LOAD d:\program files (x86)\gnu tools arm embedded\8 2019-q3-update\bin\../arm-none-eabi/lib\libm.a
 LOAD d:\program files (x86)\gnu tools arm embedded\8 2019-q3-update\bin\../arm-none-eabi/lib\libc.a
@@ -233,39 +231,39 @@ LOAD ..\libbip\libbip.a
 
 .interp         0x00008000       0x11
  *(.interp)
- .interp        0x00008000       0x11 main.o
+ .interp        0x00008000       0x11 BipStatusbarLib.o
 
 .note.gnu.build-id
  *(.note.gnu.build-id)
 
 .hash           0x00008014       0x18
  *(.hash)
- .hash          0x00008014       0x18 main.o
+ .hash          0x00008014       0x18 BipStatusbarLib.o
 
 .gnu.hash
  *(.gnu.hash)
 
 .dynsym         0x0000802c       0x30
  *(.dynsym)
- .dynsym        0x0000802c       0x30 main.o
+ .dynsym        0x0000802c       0x30 BipStatusbarLib.o
 
 .dynstr         0x0000805c        0x1
  *(.dynstr)
- .dynstr        0x0000805c        0x1 main.o
+ .dynstr        0x0000805c        0x1 BipStatusbarLib.o
 
 .gnu.version    0x0000805e        0x0
  *(.gnu.version)
- .gnu.version   0x0000805e        0x0 main.o
+ .gnu.version   0x0000805e        0x0 BipStatusbarLib.o
 
 .gnu.version_d  0x00008060        0x0
  *(.gnu.version_d)
  .gnu.version_d
-                0x00008060        0x0 main.o
+                0x00008060        0x0 BipStatusbarLib.o
 
 .gnu.version_r  0x00008060        0x0
  *(.gnu.version_r)
  .gnu.version_r
-                0x00008060        0x0 main.o
+                0x00008060        0x0 BipStatusbarLib.o
 
 .rel.init
  *(.rel.init)
@@ -275,7 +273,7 @@ LOAD ..\libbip\libbip.a
 
 .rel.text       0x00008060       0xb0
  *(.rel.text .rel.text.* .rel.gnu.linkonce.t.*)
- .rel.text      0x00008060       0xb0 main.o
+ .rel.text      0x00008060       0xb0 BipStatusbarLib.o
 
 .rela.text
  *(.rela.text .rela.text.* .rela.gnu.linkonce.t.*)
@@ -296,7 +294,7 @@ LOAD ..\libbip\libbip.a
                 0x00008110        0x0
  *(.rel.data.rel.ro .rel.data.rel.ro.* .rel.gnu.linkonce.d.rel.ro.*)
  .rel.data.rel.ro
-                0x00008110        0x0 main.o
+                0x00008110        0x0 BipStatusbarLib.o
 
 .rela.data.rel.ro
  *(.rela.data.rel.ro .rela.data.rel.ro.* .rela.gnu.linkonce.d.rel.ro.*)
@@ -304,7 +302,7 @@ LOAD ..\libbip\libbip.a
 .rel.data       0x00008110       0x20
  *(.rel.data .rel.data.* .rel.gnu.linkonce.d.*)
  .rel.data.rel.screen_data
-                0x00008110       0x20 main.o
+                0x00008110       0x20 BipStatusbarLib.o
 
 .rela.data
  *(.rela.data .rela.data.* .rela.gnu.linkonce.d.*)
@@ -335,14 +333,14 @@ LOAD ..\libbip\libbip.a
 
 .rel.got        0x00008130       0x18
  *(.rel.got)
- .rel.got       0x00008130       0x18 main.o
+ .rel.got       0x00008130       0x18 BipStatusbarLib.o
 
 .rela.got
  *(.rela.got)
 
 .rel.bss        0x00008148        0x0
  *(.rel.bss .rel.bss.* .rel.gnu.linkonce.b.*)
- .rel.bss       0x00008148        0x0 main.o
+ .rel.bss       0x00008148        0x0 BipStatusbarLib.o
 
 .rela.bss
  *(.rela.bss .rela.bss.* .rela.gnu.linkonce.b.*)
@@ -350,7 +348,7 @@ LOAD ..\libbip\libbip.a
 .rel.iplt       0x00008148        0x0
                 [!provide]                PROVIDE (__rel_iplt_start = .)
  *(.rel.iplt)
- .rel.iplt      0x00008148        0x0 main.o
+ .rel.iplt      0x00008148        0x0 BipStatusbarLib.o
                 [!provide]                PROVIDE (__rel_iplt_end = .)
 
 .rela.iplt      0x00008148        0x0
@@ -360,7 +358,7 @@ LOAD ..\libbip\libbip.a
 
 .rel.plt        0x00008148        0x0
  *(.rel.plt)
- .rel.plt       0x00008148        0x0 main.o
+ .rel.plt       0x00008148        0x0 BipStatusbarLib.o
 
 .rela.plt
  *(.rela.plt)
@@ -370,13 +368,13 @@ LOAD ..\libbip\libbip.a
 
 .plt            0x00008148        0x0
  *(.plt)
- .plt           0x00008148        0x0 main.o
+ .plt           0x00008148        0x0 BipStatusbarLib.o
 
 .iplt           0x00008148        0x0
  *(.iplt)
- .iplt          0x00008148        0x0 main.o
+ .iplt          0x00008148        0x0 BipStatusbarLib.o
 
-.text           0x00008148      0x74c
+.text           0x00008148      0x898
  *(.text.unlikely .text.*_unlikely .text.unlikely.*)
  *(.text.exit .text.exit.*)
  *(.text.startup .text.startup.*)
@@ -386,110 +384,119 @@ LOAD ..\libbip\libbip.a
  *(.text.hot .text.hot.*)
  *(.text .stub .text.* .gnu.linkonce.t.*)
  *fill*         0x00008152        0x2 
- .text          0x00008154       0x54 main.o
+ .text.show_statusbar
+                0x00008154      0x1cc BipStatusbarLib.o
+                0x00008154                show_statusbar
+ .text          0x00008320       0x54 main.o
  .text.key_press_screen
-                0x000081a8       0x3c main.o
-                0x000081a8                key_press_screen
- .text.show_battery
-                0x000081e4       0xd8 main.o
-                0x000081e4                show_battery
+                0x00008374       0x3c main.o
+                0x00008374                key_press_screen
  .text.draw_screen
-                0x000082bc       0x6c main.o
-                0x000082bc                draw_screen
+                0x000083b0       0x78 main.o
+                0x000083b0                draw_screen
  .text.show_screen
-                0x00008328      0x22c main.o
-                0x00008328                show_screen
+                0x00008428      0x22c main.o
+                0x00008428                show_screen
  .text.screen_job
-                0x00008554       0x16 main.o
-                0x00008554                screen_job
- *fill*         0x0000856a        0x2 
+                0x00008654       0x3e main.o
+                0x00008654                screen_job
+ *fill*         0x00008692        0x2 
  .text.dispatch_screen
-                0x0000856c      0x1f0 main.o
-                0x0000856c                dispatch_screen
- .text          0x0000875c        0xc ..\libbip\libbip.a(import.o)
-                0x0000875c                _start
+                0x00008694      0x1f0 main.o
+                0x00008694                dispatch_screen
+ .text          0x00008884        0xc ..\libbip\libbip.a(import.o)
+                0x00008884                _start
  .text.text_out
-                0x00008768        0xc ..\libbip\libbip.a(import.o)
-                0x00008768                text_out
+                0x00008890        0xc ..\libbip\libbip.a(import.o)
+                0x00008890                text_out
+ .text.text_out_center
+                0x0000889c        0xc ..\libbip\libbip.a(import.o)
+                0x0000889c                text_out_center
  .text.set_bg_color
-                0x00008774        0xc ..\libbip\libbip.a(import.o)
-                0x00008774                set_bg_color
+                0x000088a8        0xc ..\libbip\libbip.a(import.o)
+                0x000088a8                set_bg_color
  .text.set_fg_color
-                0x00008780        0xc ..\libbip\libbip.a(import.o)
-                0x00008780                set_fg_color
+                0x000088b4        0xc ..\libbip\libbip.a(import.o)
+                0x000088b4                set_fg_color
+ .text.draw_horizontal_line
+                0x000088c0        0xc ..\libbip\libbip.a(import.o)
+                0x000088c0                draw_horizontal_line
  .text.fill_screen_bg
-                0x0000878c        0xc ..\libbip\libbip.a(import.o)
-                0x0000878c                fill_screen_bg
+                0x000088cc        0xc ..\libbip\libbip.a(import.o)
+                0x000088cc                fill_screen_bg
  .text.draw_filled_rect_bg
-                0x00008798        0xc ..\libbip\libbip.a(import.o)
-                0x00008798                draw_filled_rect_bg
+                0x000088d8        0xc ..\libbip\libbip.a(import.o)
+                0x000088d8                draw_filled_rect_bg
  .text.repaint_screen_lines
-                0x000087a4        0xc ..\libbip\libbip.a(import.o)
-                0x000087a4                repaint_screen_lines
+                0x000088e4        0xc ..\libbip\libbip.a(import.o)
+                0x000088e4                repaint_screen_lines
  .text.reg_menu
-                0x000087b0        0xc ..\libbip\libbip.a(import.o)
-                0x000087b0                reg_menu
+                0x000088f0        0xc ..\libbip\libbip.a(import.o)
+                0x000088f0                reg_menu
  .text.show_menu_animate
-                0x000087bc        0xc ..\libbip\libbip.a(import.o)
-                0x000087bc                show_menu_animate
+                0x000088fc        0xc ..\libbip\libbip.a(import.o)
+                0x000088fc                show_menu_animate
  .text.load_font
-                0x000087c8        0xc ..\libbip\libbip.a(import.o)
-                0x000087c8                load_font
+                0x00008908        0xc ..\libbip\libbip.a(import.o)
+                0x00008908                load_font
  .text._sprintf
-                0x000087d4        0xc ..\libbip\libbip.a(import.o)
-                0x000087d4                _sprintf
- .text._memclr  0x000087e0        0xc ..\libbip\libbip.a(import.o)
-                0x000087e0                _memclr
+                0x00008914        0xc ..\libbip\libbip.a(import.o)
+                0x00008914                _sprintf
+ .text._memclr  0x00008920        0xc ..\libbip\libbip.a(import.o)
+                0x00008920                _memclr
  .text.set_update_period
-                0x000087ec        0xc ..\libbip\libbip.a(import.o)
-                0x000087ec                set_update_period
+                0x0000892c        0xc ..\libbip\libbip.a(import.o)
+                0x0000892c                set_update_period
  .text.set_display_state_value
-                0x000087f8        0xc ..\libbip\libbip.a(import.o)
-                0x000087f8                set_display_state_value
- .text.vibrate  0x00008804        0xc ..\libbip\libbip.a(import.o)
-                0x00008804                vibrate
+                0x00008938        0xc ..\libbip\libbip.a(import.o)
+                0x00008938                set_display_state_value
+ .text.vibrate  0x00008944        0xc ..\libbip\libbip.a(import.o)
+                0x00008944                vibrate
+ .text.get_current_date_time
+                0x00008950        0xc ..\libbip\libbip.a(import.o)
+                0x00008950                get_current_date_time
  .text.show_watchface
-                0x00008810        0xc ..\libbip\libbip.a(import.o)
-                0x00008810                show_watchface
+                0x0000895c        0xc ..\libbip\libbip.a(import.o)
+                0x0000895c                show_watchface
  .text.show_big_digit
-                0x0000881c        0xc ..\libbip\libbip.a(import.o)
-                0x0000881c                show_big_digit
+                0x00008968        0xc ..\libbip\libbip.a(import.o)
+                0x00008968                show_big_digit
+ .text.check_app_state
+                0x00008974        0xc ..\libbip\libbip.a(import.o)
+                0x00008974                check_app_state
  .text.get_selected_locale
-                0x00008828        0xc ..\libbip\libbip.a(import.o)
-                0x00008828                get_selected_locale
+                0x00008980        0xc ..\libbip\libbip.a(import.o)
+                0x00008980                get_selected_locale
  .text.pvPortMalloc
-                0x00008834        0xc ..\libbip\libbip.a(import.o)
-                0x00008834                pvPortMalloc
+                0x0000898c        0xc ..\libbip\libbip.a(import.o)
+                0x0000898c                pvPortMalloc
  .text.get_fw_version
-                0x00008840        0xc ..\libbip\libbip.a(import.o)
-                0x00008840                get_fw_version
+                0x00008998        0xc ..\libbip\libbip.a(import.o)
+                0x00008998                get_fw_version
  .text.ElfReadSettings
-                0x0000884c        0xc ..\libbip\libbip.a(import.o)
-                0x0000884c                ElfReadSettings
+                0x000089a4        0xc ..\libbip\libbip.a(import.o)
+                0x000089a4                ElfReadSettings
  .text.ElfWriteSettings
-                0x00008858        0xc ..\libbip\libbip.a(import.o)
-                0x00008858                ElfWriteSettings
+                0x000089b0        0xc ..\libbip\libbip.a(import.o)
+                0x000089b0                ElfWriteSettings
  .text.show_elf_res_by_id
-                0x00008864        0xc ..\libbip\libbip.a(import.o)
-                0x00008864                show_elf_res_by_id
- .text.get_res_params
-                0x00008870        0xc ..\libbip\libbip.a(import.o)
-                0x00008870                get_res_params
+                0x000089bc        0xc ..\libbip\libbip.a(import.o)
+                0x000089bc                show_elf_res_by_id
  .text.get_var_menu_overlay
-                0x0000887c        0xc ..\libbip\libbip.a(import.o)
-                0x0000887c                get_var_menu_overlay
+                0x000089c8        0xc ..\libbip\libbip.a(import.o)
+                0x000089c8                get_var_menu_overlay
  .text.get_ptr_temp_buf_2
-                0x00008888        0xc ..\libbip\libbip.a(import.o)
-                0x00008888                get_ptr_temp_buf_2
+                0x000089d4        0xc ..\libbip\libbip.a(import.o)
+                0x000089d4                get_ptr_temp_buf_2
  *(.gnu.warning)
  *(.glue_7t)
- .glue_7t       0x00008894        0x0 linker stubs
+ .glue_7t       0x000089e0        0x0 linker stubs
  *(.glue_7)
- .glue_7        0x00008894        0x0 linker stubs
+ .glue_7        0x000089e0        0x0 linker stubs
  *(.vfp11_veneer)
- .vfp11_veneer  0x00008894        0x0 linker stubs
+ .vfp11_veneer  0x000089e0        0x0 linker stubs
  *(.v4_bx)
- .v4_bx         0x00008894        0x0 linker stubs
+ .v4_bx         0x000089e0        0x0 linker stubs
 
 .fini
  *(SORT_NONE(.fini))
@@ -497,16 +504,16 @@ LOAD ..\libbip\libbip.a
                 [!provide]                PROVIDE (_etext = .)
                 [!provide]                PROVIDE (etext = .)
 
-.rodata         0x00008894      0x152
+.rodata         0x000089e0      0x16a
  *(.rodata .rodata.* .gnu.linkonce.r.*)
+ .rodata.show_statusbar.str1.1
+                0x000089e0       0x1d BipStatusbarLib.o
  .rodata.draw_screen.str1.1
-                0x00008894        0x5 main.o
- .rodata.show_battery.str1.1
-                0x00008899        0x5 main.o
+                0x000089fd        0x5 main.o
  .rodata.show_screen.str1.1
-                0x0000889e       0x16 main.o
+                0x00008a02       0x16 main.o
  .rodata.str1.1
-                0x000088b4      0x132 main.o
+                0x00008a18      0x132 main.o
 
 .rodata1
  *(.rodata1)
@@ -535,7 +542,7 @@ LOAD ..\libbip\libbip.a
 
 .exception_ranges
  *(.exception_ranges*)
-                0x000089e6                . = .
+                0x00008b4a                . = .
 
 .eh_frame
  *(.eh_frame)
@@ -550,7 +557,7 @@ LOAD ..\libbip\libbip.a
 .exception_ranges
  *(.exception_ranges*)
 
-.tdata          0x000089e6        0x0
+.tdata          0x00008b4a        0x0
                 [!provide]                PROVIDE (__tdata_start = .)
  *(.tdata .tdata.* .gnu.linkonce.td.*)
 
@@ -558,18 +565,18 @@ LOAD ..\libbip\libbip.a
  *(.tbss .tbss.* .gnu.linkonce.tb.*)
  *(.tcommon)
 
-.preinit_array  0x000089e6        0x0
+.preinit_array  0x00008b4a        0x0
                 [!provide]                PROVIDE (__preinit_array_start = .)
  *(.preinit_array)
                 [!provide]                PROVIDE (__preinit_array_end = .)
 
-.init_array     0x000089e6        0x0
+.init_array     0x00008b4a        0x0
                 [!provide]                PROVIDE (__init_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*))
  *(.init_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .ctors)
                 [!provide]                PROVIDE (__init_array_end = .)
 
-.fini_array     0x000089e6        0x0
+.fini_array     0x00008b4a        0x0
                 [!provide]                PROVIDE (__fini_array_start = .)
  *(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*))
  *(.fini_array EXCLUDE_FILE(*crtend?.o *crtend.o *crtbegin?.o *crtbegin.o) .dtors)
@@ -592,55 +599,55 @@ LOAD ..\libbip\libbip.a
 .jcr
  *(.jcr)
 
-.data.rel.ro    0x000089e6        0x0
+.data.rel.ro    0x00008b4a        0x0
  *(.data.rel.ro.local* .gnu.linkonce.d.rel.ro.local.*)
  *(.data.rel.ro .data.rel.ro.* .gnu.linkonce.d.rel.ro.*)
- .data.rel.ro   0x000089e6        0x0 main.o
+ .data.rel.ro   0x00008b4a        0x0 BipStatusbarLib.o
 
-.dynamic        0x000089e8       0x80
+.dynamic        0x00008b4c       0x80
  *(.dynamic)
- .dynamic       0x000089e8       0x80 main.o
-                0x000089e8                _DYNAMIC
+ .dynamic       0x00008b4c       0x80 BipStatusbarLib.o
+                0x00008b4c                _DYNAMIC
 
-.got            0x00008a68       0x18
+.got            0x00008bcc       0x18
  *(.got.plt)
- .got.plt       0x00008a68        0xc main.o
-                0x00008a68                _GLOBAL_OFFSET_TABLE_
+ .got.plt       0x00008bcc        0xc BipStatusbarLib.o
+                0x00008bcc                _GLOBAL_OFFSET_TABLE_
  *(.igot.plt)
- .igot.plt      0x00008a74        0x0 main.o
+ .igot.plt      0x00008bd8        0x0 BipStatusbarLib.o
  *(.got)
- .got           0x00008a74        0xc main.o
+ .got           0x00008bd8        0xc BipStatusbarLib.o
  *(.igot)
 
-.data           0x00008a80       0x20
-                0x00008a80                __data_start = .
+.data           0x00008be4       0x20
+                0x00008be4                __data_start = .
  *(.data .data.* .gnu.linkonce.d.*)
  .data.rel.screen_data
-                0x00008a80       0x20 main.o
-                0x00008a80                screen_data
+                0x00008be4       0x20 main.o
+                0x00008be4                screen_data
 
 .data1
  *(.data1)
-                0x00008aa0                _edata = .
+                0x00008c04                _edata = .
                 [!provide]                PROVIDE (edata = .)
-                0x00008aa0                . = .
-                0x00008aa0                __bss_start = .
-                0x00008aa0                __bss_start__ = .
+                0x00008c04                . = .
+                0x00008c04                __bss_start = .
+                0x00008c04                __bss_start__ = .
 
-.bss            0x00008aa0        0x4
+.bss            0x00008c04        0x4
  *(.dynbss)
- .dynbss        0x00008aa0        0x0 main.o
+ .dynbss        0x00008c04        0x0 BipStatusbarLib.o
  *(.bss .bss.* .gnu.linkonce.b.*)
- .bss.incr_no   0x00008aa0        0x4 main.o
+ .bss.incr_no   0x00008c04        0x4 main.o
  *(COMMON)
-                0x00008aa4                . = ALIGN ((. != 0x0)?0x4:0x1)
-                0x00008aa4                _bss_end__ = .
-                0x00008aa4                __bss_end__ = .
-                0x00008aa4                . = ALIGN (0x4)
-                0x00008aa4                . = SEGMENT_START ("ldata-segment", .)
-                0x00008aa4                . = ALIGN (0x4)
-                0x00008aa4                __end__ = .
-                0x00008aa4                _end = .
+                0x00008c08                . = ALIGN ((. != 0x0)?0x4:0x1)
+                0x00008c08                _bss_end__ = .
+                0x00008c08                __bss_end__ = .
+                0x00008c08                . = ALIGN (0x4)
+                0x00008c08                . = SEGMENT_START ("ldata-segment", .)
+                0x00008c08                . = ALIGN (0x4)
+                0x00008c08                __end__ = .
+                0x00008c08                _end = .
                 [!provide]                PROVIDE (end = .)
 
 .stack          0x00080000        0x0
@@ -667,8 +674,9 @@ LOAD ..\libbip\libbip.a
 
 .comment        0x00000000       0x76
  *(.comment)
- .comment       0x00000000       0x76 main.o
+ .comment       0x00000000       0x76 BipStatusbarLib.o
                                  0x77 (size before relaxing)
+ .comment       0x00000076       0x77 main.o
 
 .gnu.build.attributes
  *(.gnu.build.attributes .gnu.build.attributes.*)
@@ -740,9 +748,11 @@ LOAD ..\libbip\libbip.a
                 0x00000000       0x32
  *(.ARM.attributes)
  .ARM.attributes
-                0x00000000       0x34 main.o
+                0x00000000       0x34 BipStatusbarLib.o
  .ARM.attributes
-                0x00000034       0x21 ..\libbip\libbip.a(import.o)
+                0x00000034       0x34 main.o
+ .ARM.attributes
+                0x00000068       0x21 ..\libbip\libbip.a(import.o)
  *(.gnu.attributes)
 
 .note.gnu.arm.ident
@@ -762,8 +772,9 @@ ElfReadSettings                                   ..\libbip\libbip.a(import.o)
                                                   main.o
 ElfWriteSettings                                  ..\libbip\libbip.a(import.o)
                                                   main.o
-_DYNAMIC                                          main.o
-_GLOBAL_OFFSET_TABLE_                             main.o
+_DYNAMIC                                          BipStatusbarLib.o
+_GLOBAL_OFFSET_TABLE_                             BipStatusbarLib.o
+                                                  main.o
 _memclr                                           ..\libbip\libbip.a(import.o)
                                                   main.o
 _memcmp                                           ..\libbip\libbip.a(import.o)
@@ -773,6 +784,7 @@ _pvPortMalloc                                     ..\libbip\libbip.a(import.o)
 _rand                                             ..\libbip\libbip.a(import.o)
 _sprintf                                          ..\libbip\libbip.a(import.o)
                                                   main.o
+                                                  BipStatusbarLib.o
 _srand                                            ..\libbip\libbip.a(import.o)
 _start                                            ..\libbip\libbip.a(import.o)
 _strcmp                                           ..\libbip\libbip.a(import.o)
@@ -783,6 +795,7 @@ _strncpy                                          ..\libbip\libbip.a(import.o)
 add_menu_item                                     ..\libbip\libbip.a(import.o)
 add_notification                                  ..\libbip\libbip.a(import.o)
 check_app_state                                   ..\libbip\libbip.a(import.o)
+                                                  BipStatusbarLib.o
 clear_menu                                        ..\libbip\libbip.a(import.o)
 create_and_show_notification                      ..\libbip\libbip.a(import.o)
 dispatch_alarm_set                                ..\libbip\libbip.a(import.o)
@@ -792,7 +805,9 @@ dispatch_screen                                   main.o
 draw_filled_rect                                  ..\libbip\libbip.a(import.o)
 draw_filled_rect_bg                               ..\libbip\libbip.a(import.o)
                                                   main.o
+                                                  BipStatusbarLib.o
 draw_horizontal_line                              ..\libbip\libbip.a(import.o)
+                                                  BipStatusbarLib.o
 draw_menu                                         ..\libbip\libbip.a(import.o)
 draw_progressbar                                  ..\libbip\libbip.a(import.o)
 draw_rect                                         ..\libbip\libbip.a(import.o)
@@ -805,9 +820,10 @@ fill_screen_bg                                    ..\libbip\libbip.a(import.o)
                                                   main.o
 get_backlight_value                               ..\libbip\libbip.a(import.o)
 get_current_date_time                             ..\libbip\libbip.a(import.o)
+                                                  BipStatusbarLib.o
 get_current_timestamp                             ..\libbip\libbip.a(import.o)
 get_fw_version                                    ..\libbip\libbip.a(import.o)
-                                                  main.o
+                                                  BipStatusbarLib.o
 get_generic_data                                  ..\libbip\libbip.a(import.o)
 get_hrm_struct                                    ..\libbip\libbip.a(import.o)
 get_last_heartrate                                ..\libbip\libbip.a(import.o)
@@ -827,7 +843,6 @@ get_ptr_temp_buf_2                                ..\libbip\libbip.a(import.o)
                                                   main.o
 get_res_count                                     ..\libbip\libbip.a(import.o)
 get_res_params                                    ..\libbip\libbip.a(import.o)
-                                                  main.o
 get_res_ret_language                              ..\libbip\libbip.a(import.o)
 get_res_string_by_id                              ..\libbip\libbip.a(import.o)
 get_selected_locale                               ..\libbip\libbip.a(import.o)
@@ -866,6 +881,7 @@ reg_menu                                          ..\libbip\libbip.a(import.o)
 repaint_screen                                    ..\libbip\libbip.a(import.o)
 repaint_screen_lines                              ..\libbip\libbip.a(import.o)
                                                   main.o
+                                                  BipStatusbarLib.o
 screen_data                                       main.o
 screen_job                                        main.o
 send_host_app_data                                ..\libbip\libbip.a(import.o)
@@ -874,11 +890,13 @@ set_backlight_percent                             ..\libbip\libbip.a(import.o)
 set_backlight_state                               ..\libbip\libbip.a(import.o)
 set_bg_color                                      ..\libbip\libbip.a(import.o)
                                                   main.o
+                                                  BipStatusbarLib.o
 set_close_timer                                   ..\libbip\libbip.a(import.o)
 set_display_state_value                           ..\libbip\libbip.a(import.o)
                                                   main.o
 set_fg_color                                      ..\libbip\libbip.a(import.o)
                                                   main.o
+                                                  BipStatusbarLib.o
 set_generic_data                                  ..\libbip\libbip.a(import.o)
 set_graph_callback_to_ram_1                       ..\libbip\libbip.a(import.o)
 set_hrm_mode                                      ..\libbip\libbip.a(import.o)
@@ -894,7 +912,6 @@ set_var_current_screen                            ..\libbip\libbip.a(import.o)
 set_var_menu_overlay                              ..\libbip\libbip.a(import.o)
 set_var_swipe_screen_active_number                ..\libbip\libbip.a(import.o)
 show_alarm_set_screen                             ..\libbip\libbip.a(import.o)
-show_battery                                      main.o
 show_big_digit                                    ..\libbip\libbip.a(import.o)
                                                   main.o
 show_elf_res_by_id                                ..\libbip\libbip.a(import.o)
@@ -911,6 +928,8 @@ show_options_menu_2nd_screen                      ..\libbip\libbip.a(import.o)
 show_poweroff_message                             ..\libbip\libbip.a(import.o)
 show_res_by_id                                    ..\libbip\libbip.a(import.o)
 show_screen                                       main.o
+show_statusbar                                    BipStatusbarLib.o
+                                                  main.o
 show_watchface                                    ..\libbip\libbip.a(import.o)
                                                   main.o
 stm32_soft_reset                                  ..\libbip\libbip.a(import.o)
@@ -919,7 +938,9 @@ store_selected_lang                               ..\libbip\libbip.a(import.o)
 switch_gps_pressure_sensors                       ..\libbip\libbip.a(import.o)
 text_out                                          ..\libbip\libbip.a(import.o)
                                                   main.o
+                                                  BipStatusbarLib.o
 text_out_center                                   ..\libbip\libbip.a(import.o)
+                                                  BipStatusbarLib.o
 text_width                                        ..\libbip\libbip.a(import.o)
 vPortFree                                         ..\libbip\libbip.a(import.o)
 vTaskDelay                                        ..\libbip\libbip.a(import.o)

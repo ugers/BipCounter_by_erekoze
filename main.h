@@ -1,6 +1,7 @@
 /*
 	BipCounter for Amazfit Bip BipOS
-	(C) erekoze  2020 https://myamazfit.ru/members/erekoze.16826/
+	(C) erekoze 2020 https://myamazfit.ru/members/erekoze.16826/
+	(C) ugers 2020
 	
 	Приложение Счётчик для BipOS
 	
@@ -10,13 +11,12 @@
 #ifndef __APP_TEMPLATE_H__
 #define __APP_TEMPLATE_H__
 
-typedef unsigned short word;
-
 // структура данных для нашего экрана
 struct app_data_ {
 		void* 	ret_f;					//	адрес функции возврата
 		Elf_proc_* 	proc;				//	указатель на данные запущенного процесса
 		int		col;
+		int		timeout;
 };
 
 

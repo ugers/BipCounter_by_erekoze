@@ -1,6 +1,7 @@
 /*
 	BipCounter for Amazfit Bip BipOS
-	(C) erekoze  2020 https://myamazfit.ru/members/erekoze.16826/
+	(C) erekoze 2020 https://myamazfit.ru/members/erekoze.16826/
+	(C) ugers 2020
 	
 	Приложение Счётчик для BipOS
 	
@@ -12,6 +13,7 @@
 	#include <libbip.h>
 #endif
 #include "main.h"
+#include "BipStatusbarLib.h"
 
 //	структура меню экрана - для каждого экрана своя
 struct regmenu_ screen_data = {
@@ -135,13 +137,13 @@ set_display_state_value(2, 1);
 		};
 
 // здесь выполняем отрисовку интерфейса, обновление (перенос в видеопамять) экрана выполнять не нужно
-set_bg_color(COLOR_BLACK); // делаем фон синим
+set_bg_color(COLOR_BLACK); // делаем фон черным
 fill_screen_bg(); // заливаем экран фоном
 load_font(); // подгружаем шрифты
 set_fg_color(COLOR_WHITE); // делаем текст белым
-text_out("BipCounter", 3, 3); // выводим заголовок
-show_elf_res_by_id(ELF_INDEX_SELF, 7, 3, 21); // рисуем (C)
-text_out("AVBurkov", 25, 22); // выводим автора
+text_out("Counter", 3, 24); // выводим заголовок
+text_out("by", 74, 24); // выводим заголовок
+text_out("AVBurkov", 96, 24); // выводим автора
 draw_screen(app_data->col); // перерисоваваем экран
 show_elf_res_by_id(ELF_INDEX_SELF, 0, 7, 112); // рисуем руку
 show_elf_res_by_id(ELF_INDEX_SELF, 1, 28, 112); // рисуем стрелку вверх
@@ -173,10 +175,17 @@ struct app_data_ *	app_data = *app_data_p;				//	указатель на дан�
 
 // делаем периодическое действие: анимация, увеличение счетчика, обновление экрана,
 // отрисовку интерфейса, обновление (перенос в видеопамять) экрана выполнять нужно
-fill_screen_bg(); // заливаем экран фоном
-draw_screen(app_data->col); // перерисоваваем экран
+if (app_data->timeout != 1) {
+	set_bg_color(COLOR_BLACK);
+	fill_screen_bg(); // заливаем экран фоном
+	app_data->timeout = 1;
+	draw_screen(app_data->col); // перерисоваваем экран
+}else{
+	show_statusbar(3, COLOR_BLACK,COLOR_WHITE);	// статус бар
+}
+
 // при необходимости заново ставим таймер вызова screen_job
-//set_update_period(1, 200); // при запуске ставим паузу после запуска ставим паузу 200мс
+set_update_period(1, 60000); // при запуске ставим паузу после запуска ставим паузу 200мс
 }
 
 int dispatch_screen (void *param){
@@ -287,61 +296,12 @@ switch (gest->gesture){
 	return result;
 };
 
-void show_battery(int x, int y){
-    struct res_params_ res_params;
-    get_res_params(ELF_INDEX_SELF, 8, &res_params);
-    x -= res_params.width;
-    show_elf_res_by_id(ELF_INDEX_SELF, 8, x, y+2);
-
-    if (get_fw_version() != 11536)
-    {
-        //set_bg_color(COLOR_YELLOW);
-        //draw_filled_rect_bg(x + 2, y + 2, x + 21, y + 10);
-    }else{
-#ifdef BipEmulator
-        word battery_percentage = 80;
-#else
-        word battery_percentage = *((word*)(0x20000334));
-#endif
-		//Цвет индикатора батареи
-        char r_count = battery_percentage / 20;
-        r_count = r_count > 4 ? 4 : r_count < 1 ? 1 : r_count;
-		if (battery_percentage > 20) {
-			set_bg_color(battery_percentage <= 60 ? COLOR_YELLOW : COLOR_GREEN);
-		}else if (battery_percentage <= 20) {
-			set_bg_color(COLOR_RED);
-		}
-
-        for (char i = 0; i < r_count; i++)
-        {
-            draw_filled_rect_bg(x + 2 + i * 5, y + 4, x + 5 + i * 5, y + 11);
-        }
-
-        x -= 3;
-		//Проценты батареи
-        do
-        {
-            char d = battery_percentage % 10;
-            //get_res_params(ELF_INDEX_SELF, d, &res_params);
-            //x -= res_params.width;
-            x -= 10;
-            //show_elf_res_by_id(ELF_INDEX_SELF, d, x, y + 1);
-			char d1[4];     // переменная для перевода переменной для печати                               
-			_sprintf(d1, "%01d", d); // конвертируем
-			set_bg_color(COLOR_BLACK); // делаем фон черным
-			text_out(d1, x, y);
-            x -= 2;
-            battery_percentage = battery_percentage / 10;
-        } while (battery_percentage);
-    }
-}
-
-
 // пользовательская функция
 void draw_screen(int col){
 	//struct app_data_**  app_data_p = (struct app_data_ **)get_ptr_temp_buf_2();    //  указатель на указатель на данные экрана
 	//struct app_data_ *	app_data = *app_data_p;				//	указатель на данные экрана
-    show_battery(170, 8);	// Заряд батареи
+    show_statusbar(3, COLOR_BLACK,COLOR_WHITE);	// статус бар
+	set_fg_color(COLOR_WHITE);
 	char crnd[8];     // переменная для перевода переменной col типа int в  тип char для печати                               
     _sprintf(crnd, "%07d", col); // конвертируем число int в char лидирующие нули, при необходимости, _sprintf добьёт сам
 	set_bg_color(COLOR_BLACK); // делаем фон черным
