@@ -306,7 +306,7 @@ void draw_screen(int col){
     _sprintf(crnd, "%07d", col); // конвертируем число int в char лидирующие нули, при необходимости, _sprintf добьёт сам
 	set_bg_color(COLOR_BLACK); // делаем фон черным
 	draw_filled_rect_bg(0, 43, 176, 110); // стираем предыдущее значение
-	show_big_digit(3, crnd, 12, 62, 5); // печатаем результат большими цифрами
+	text_out_font(3, crnd, 12, 62, 5); // печатаем результат большими цифрами
 	show_elf_res_by_id(ELF_INDEX_SELF, 6, 142-(22*incr_no), 47); // выводим индикатор разряда увеличения
 	repaint_screen_lines(0, 176); // обновляем строки экрана
 };
